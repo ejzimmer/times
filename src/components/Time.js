@@ -45,23 +45,25 @@ export default function Time({ label, location }) {
   return (
     <fieldset className={ isAsleep ? 'asleep' : ''}>
       <legend>{label}</legend>
-      { timezone 
-        ? 
-          <div className="clock">
-            <div className="days">
-              {DAYS.map(day => <span className={day === time.format('day-short') ? 'today' : ''}>{day}</span>)}
+      <div className="layout">
+        { timezone 
+          ? 
+            <div className="clock">
+              <div className="days">
+                {DAYS.map(day => <span className={day === time.format('day-short') ? 'today' : ''}>{day}</span>)}
+              </div>
+              <div className="led">{time.format('time-24')}</div>
             </div>
-            <div className="led">{time.format('time-24')}</div>
-          </div>
-        : <div>No valid timezone found. Please set one.</div>
-      }
-      <input ref={input} defaultValue={timezone} onChange={checkTimezone}></input>
-      { showSuggestion && (
-        <>
-          <label htmlFor="suggestion">Are you looking for {suggestion}?</label>
-          <input type="checkbox" name={suggestion} id="suggestion" onClick={updateTimezone}/>
-        </>)
-      }
+          : <div>No valid timezone found. Please set one.</div>
+        }
+        <input ref={input} defaultValue={timezone} onChange={checkTimezone}></input>
+        { showSuggestion && (
+          <>
+            <label htmlFor="suggestion">Are you looking for {suggestion}?</label>
+            <input type="checkbox" name={suggestion} id="suggestion" onClick={updateTimezone}/>
+          </>)
+        }
+      </div>
     </fieldset>
   )
 }

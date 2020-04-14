@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import Time from './components/Time';
+import firebase from 'firebase';
 import './App.css';
+import './styles/fonts.css';
 
 function App() {
+  const [timezones, setTimezones] = useState([]);
+
+  useEffect(() => {
+    const database = firebase.database().ref('timezones');
+    database.on('value', (snapshot) => {
+      setTimezones(Object.entries(snapshot.val()))
+    });    
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { timezones.map(([label, timezone]) => <Time key={label} label={label} location={timezone} />)}
     </div>
   );
 }

@@ -50,7 +50,7 @@ export default function Time({ label, location }) {
           ? 
             <div className="clock">
               <div className="days">
-                {DAYS.map(day => <span className={day === time.format('day-short') ? 'today' : ''}>{day}</span>)}
+                {DAYS.map(day => <span key={day} className={day === time.format('day-short') ? 'today' : ''}>{day}</span>)}
               </div>
               <div className="led">{time.format('time-24')}</div>
             </div>
@@ -58,10 +58,10 @@ export default function Time({ label, location }) {
         }
         <input ref={input} defaultValue={timezone} onChange={checkTimezone}></input>
         { showSuggestion && (
-          <>
+          <div className="suggestion">
             <label htmlFor="suggestion">Are you looking for {suggestion}?</label>
             <input type="checkbox" name={suggestion} id="suggestion" onClick={updateTimezone}/>
-          </>)
+          </div>)
         }
       </div>
     </fieldset>

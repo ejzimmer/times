@@ -1,11 +1,23 @@
+body {
+  --maroon: hsl(332, 100%, 27%);
+  --blue: hsl(228, 69%, 42%);
+  --led-colour: hsl(54, 89%, 48%);
+  --yellow: #f4bf4a;
+  background: repeating-linear-gradient(var(--maroon) 0, var(--maroon) 100px, var(--blue) 100px, var(--blue) 200px);
+  min-height: 100vh;
+}
+
 .clock {
-  --led-colour: hsl(151, 50%, 70%);
-  --background-colour: hsl(300, 0%, 3%);
+  --background-colour: hsl(300, 0%, 15%);
   background: var(--background-colour);
   border-radius: 20px;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-width: 20em;
+  padding: 10px 20px;
+  border: 6px solid hsl(205, 30%, 34%);
+  box-shadow: inset 2px 2px 5px hsla(0, 0%, 5%, .5);
 }
 
 .days {
@@ -40,4 +52,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+legend {
+  margin: auto;
+  font-size: 4em;
+  color: var(--yellow);
+  text-shadow: 1px 1px black;
+}
+
+fieldset {
+  border: none;
+  position: relative;
+}
+
+input {
+  margin-top: 10px;
+  border: none;
+  background: hsla(332, 50%, 85%, 0.5);
+  padding: 5px 10px;
+  font-size: 1.6em;
+}
+
+.suggestion {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  z-index: 1;
+  background: hsla(228, 69%, 0%, .8);
+  padding: 10px 20px;
+  color: var(--yellow);
+  font-size: 1.6em;
+}
+
+.suggestion * {
+  cursor: pointer;
+}
+
+.suggestion label {
+  margin-right: 5px;
 }

@@ -3,7 +3,7 @@ import spacetime from 'spacetime';
 import informal from 'spacetime-informal';
 import firebase from 'firebase';
 
-const DAYS = ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export default function Time({ label, location }) {
   const input = useRef();

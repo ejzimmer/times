@@ -92,3 +92,32 @@ input {
 .suggestion label {
   margin-right: 5px;
 }
+
+.auth {
+  text-align: center;
+  background: hsla(332, 50%, 85%, .5);
+  font-size: 1.6em;
+  padding: .5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth button {
+  margin: 0 .5em;
+  background: hsla(228, 69%, 42%, .8);
+  color: var(--yellow);
+  border: 0;
+  font-size: inherit;
+  padding: .25em .5em;
+  border-radius: 4px;
+  box-shadow: 
+    inset 1px 1px 2px hsla(332, 50%, 85%, .2),
+    1px 1px 2px hsla(228, 69%, 42%, .8);
+  text-transform: uppercase;
+  transition: all .2s;
+}
+.auth button:active {
+  box-shadow: none;
+  background: var(--blue);
+}

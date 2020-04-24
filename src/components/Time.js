@@ -13,8 +13,6 @@ export default function Time({ label, location }) {
   const [ suggestion, setSuggestion ] = useState()
   const [ showSuggestion, setShowSuggestion ] = useState()
 
-  const isAsleep = spacetime.now(suggestion).isAsleep();
-
   const checkTimezone = () => {
     const location = input.current.value;
     const validTimezone = informal.find(location);
@@ -43,7 +41,7 @@ export default function Time({ label, location }) {
   })
 
   return (
-    <fieldset className={ isAsleep ? 'asleep' : ''}>
+    <fieldset>
       <legend>{label}</legend>
       <div className="layout">
         { timezone 
@@ -52,7 +50,7 @@ export default function Time({ label, location }) {
               <div className="days">
                 {DAYS.map(day => <span key={day} className={day === time.format('day-short') ? 'today' : ''}>{day}</span>)}
               </div>
-              <div className="led">{time.format('time-24')}</div>
+              <div className="led">{time.format('{hour-24-pad}:{minute-pad}')}</div>
             </div>
           : <div>No valid timezone found. Please set one.</div>
         }

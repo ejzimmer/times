@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -6,7 +6,7 @@ import firebase from 'firebase';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCSfoHmhZUrD-7jnm35CzMoE6nDI4xkf4Q",
-  authDomain: "times-c6b9e.firebaseapp.com",
+  authDomain: "times-c6b9e.web.app",
   databaseURL: "https://times-c6b9e.firebaseio.com",
   projectId: "times-c6b9e",
   storageBucket: "times-c6b9e.appspot.com",
@@ -15,6 +15,28 @@ const FIREBASE_CONFIG = {
 };
 // Initialize Firebase
 firebase.initializeApp(FIREBASE_CONFIG);
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export const UserContext = createContext({ user: null })
+
+export function UserProvider({ children }) {
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      console.log('in effect', user)
+      setUser(user)
+    })
+  })
+
+  return (
+    <UserContext.Provider value={user}>
+      {children}
+    </UserContext.Provider>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>

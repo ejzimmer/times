@@ -5,7 +5,14 @@ export default function Auth() {
 
   const user = useContext(UserContext)
 
-  console.log(user)
+  if (user) {
+    const firstName = user.displayName.split(' ')[0]
+    return (
+      <div className="auth">
+        Hello {firstName}
+      </div>
+    )
+  }
 
   return (
     <div className="auth">

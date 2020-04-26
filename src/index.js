@@ -26,8 +26,9 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     auth.onAuthStateChanged(user => {
-      console.log('in effect', user)
-      setUser(user)
+      if (user.displayName.toLowerCase().includes('zimmer')) {
+        setUser(user)
+      }
     })
   })
 

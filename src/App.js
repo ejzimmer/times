@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Time from './components/Time';
 import Auth from './components/Auth';
+import Timezone from './components/Timezone'
 import firebase from 'firebase';
 import './App.css';
 import './styles/fonts.css';
@@ -12,6 +13,7 @@ function App() {
   useEffect(() => {
     const database = firebase.database().ref('timezones');
     database.on('value', (snapshot) => {
+      console.log(snapshot)
       setTimezones(Object.entries(snapshot.val()))
     });    
   }, [])
@@ -20,7 +22,8 @@ function App() {
     <UserProvider>
       <div className="App">
         <Auth />
-        { timezones.map(([label, timezone]) => <Time key={label} label={label} location={timezone} />)}
+        <Timezone timezones={timezones} />
+        { timezones.map(([label, timezone]) => <Time key={`${label}-${timezone}`} label={label} location={timezone} />)}
       </div>
     </UserProvider>
   );

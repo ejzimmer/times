@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { signInWithGoogle, UserContext } from '..'
 
 export default function Auth() {
-
   const user = useContext(UserContext)
 
   if (user) {

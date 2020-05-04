@@ -13,7 +13,6 @@ function App() {
   useEffect(() => {
     const database = firebase.database().ref('timezones');
     database.on('value', (snapshot) => {
-      console.log(snapshot)
       setTimezones(Object.entries(snapshot.val()))
     });    
   }, [])

@@ -134,3 +134,29 @@ input {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.sleeping::after {
+  content: 'Z';
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--yellow);
+  position: absolute;
+  right: 0;
+  bottom: 30%;
+  transform: translate(0, 20px);
+  animation: snooze infinite 5s ease-in;
+  text-shadow: 20px -20px transparent, 40px -40px transparent;
+}
+
+@keyframes snooze {
+  50% {
+    text-shadow: 20px -20px 1px currentColor, 40px -40px 1px transparent;
+  }
+  60% {
+    text-shadow: 20px -20px 3px currentColor, 40px -40px 3px currentColor;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -8,10 +8,12 @@ const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 export default function Time({ label, location }) {
   const input = useRef();
   const interval = useRef();
+
   const [ timezone, setTimezone ] = useState(informal.find(location))
   const [ time, setTime ] = useState(spacetime.now())
   const [ suggestion, setSuggestion ] = useState()
   const [ showSuggestion, setShowSuggestion ] = useState()
+  const [ sleeping, setSleeping ] = useState(false)
 
   const checkTimezone = () => {
     const location = input.current.value;
@@ -34,14 +36,16 @@ export default function Time({ label, location }) {
 
   useEffect(() => {
     interval.current = setInterval(() => {
-      setTime(spacetime.now(timezone))
+      const now = spacetime.now(timezone)
+      setTime(now)
+      setSleeping(now.isAsleep())
     }, 1000)
 
     return () => clearInterval(interval.current);
   })
 
   return (
-    <fieldset>
+    <fieldset className={sleeping ? 'sleeping' : ''}>
       <legend>{label}</legend>
       <div className="layout">
         { timezone 
